@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<a hx-get="{% url 'playlist-add' request.user.id object.db_id %}" hx-target='#playlist-add-video-form'
+    hx-swap='beforeend'>
+    <button>Add video To Playlist</button>
+</a>
+
+
+<div id='playlist-add-video-form'></div>
+
+
+<div id='update-videos-playlist'>
+    {% for video_obj in video_object_list %}
+    {% include 'playlist/snippits/detail-inline.html' %}
+    {% endfor %}
+</div>
+
+{% endblock content %}

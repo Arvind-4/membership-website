@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_field %}
+{% load static %}
+
+{% block content %}
+
+<div class='d-flex align-items-center min-vh-100'>
+  <div class="col-4 mx-auto">
+    <main class="form-signin">
+      <form method="POST">
+        <div class='text-center'>
+          <img class="mb-4" src="{% static 'images/logo.png' %}" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        </div>
+        {% csrf_token %}
+        {% for field in form %}
+
+        <div class='form-floating'>
+          {% if field.errors %}
+          {% crispy_field field 'class' 'form-control is-invalid' 'placeholder' field.name %}
+          {% for error in field.errors %} <p class='text-bold text-center text-danger p-1'>{{error}}</p> {% endfor %}
+          {% else %}
+          {% crispy_field field 'class' 'form-control' 'placeholder' field.name %}
+          {% endif %}
+          <label {% if field.id_for_label %} for="{{ field.id_for_label }}" {% endif %}{% if label_class %}
+            class="{{ label_class }}" {% endif %}>
+            {{ field.label }}
+          </label>
+        </div>
+        {% endfor %}
+        <div class="checkbox my-2 text-center">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-bold text-center">Don't have an Account?
+          <a class="link-primary" href="{% url 'sign-up' %}"> Sign Up Here!</a>
+        </p>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017–2021</p>
+      </form>
+    </main>
+  </div>
+</div>
+
+{% endblock content %}

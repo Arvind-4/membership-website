@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+    <div class="col-md-12 pt-5">
+        <button type="submit" class="btn btn-sm btn-primary float-end">
+            Submit
+        </button>
+        <button type='button' class='mx-3 btn btn-sm btn-outline-secondary float-end' onclick="history.back()">
+            Go Back
+        </button>
+    </div>
+</form>

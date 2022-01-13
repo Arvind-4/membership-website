@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class='row'>
+    <div class='col-12 col-md-9'>
+        <div class='mt-3 mb-2'>
+            <div class='ratio ratio-21x9' id='player' data-video-id="{{ object.host_id }}" style="height: 75vh;">
+            </div>
+        </div>
+    </div>
+    <div class='col-12 col-md-3'>
+        {% include 'videos/snippits/video-detail-sidebar.html' %}
+    </div>
+</div>
+
+<script src="{% static 'js/player.js' %}"></script>
+
+{% endblock content %}

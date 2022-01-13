@@ -1,0 +1,16 @@
+.idea/
+
+.ipynb_checkpoints/
+etc/
+share/
+
+Lib/
+Include/
+Scripts/
+
+__pycache__/
+migrations/
+
+bundle/
+
+*.env

@@ -1,0 +1,8 @@
+cassandra-driver==3.25.0
+Django==4.0
+django-cassandra-engine==1.6.3
+django-crispy-forms==1.13.0
+django-extensions==3.1.5
+django-htmx==1.6.0
+jupyter==1.0.0
+notebook==6.4.6

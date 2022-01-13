@@ -1,0 +1,9 @@
+{% load crispy_forms_tags %}
+<form hx-post="{% url 'video-edit' object.host_id object.db_id %}" hx-target='#video-list-{{object.host_id}}'>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-sm btn-primary">
+        Submit
+    </button>
+    </div>
+</form>

@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+<form hx-post="{% url 'playlist-edit' request.user.id object.db_id %}"
+    hx-target='#playlist-video-inline-{{object.db_id}}'>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-sm btn-primary">
+        Submit
+    </button>
+    </div>
+</form>

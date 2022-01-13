@@ -1,0 +1,16 @@
+<div id='playlist-video-inline-{{object.db_id}}'>
+    <div class="list-group-item list-group-item-action">
+        <a href="{% url 'playlist-detail' request.user.id object.db_id %}" style="text-decoration: none;">
+
+            {{ object.title }}
+        </a>
+        <a hx-confirm='Delete {{object.title}}?' hx-trigger='click'
+            hx-get="{% url 'playlist-delete' request.user.id object.db_id %}"
+            hx-target='#playlist-video-inline-{{object.db_id}}' hx-swap='outerHTML'>
+            <button class='mx-3 btn btn-sm btn-outline-danger float-end'>Delete</button>
+        </a>
+        <button hx-get='{% url "playlist-edit" request.user.id object.db_id %}'
+            hx-target='#playlist-video-inline-{{object.db_id}}'
+            class='btn btn-sm btn-outline-secondary float-end'>Update</button>
+    </div>
+</div>

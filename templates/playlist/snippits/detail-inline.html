@@ -1,0 +1,11 @@
+<div id='playlist-video-{{video_obj.host_id}}'>
+    <li><a href="{% url 'video-detail' video_obj.host_id video_obj.db_id %}">{{video_obj}}</a>
+        <a href="{% url 'playlist-remove' request.user.id object.db_id video_obj.host_id %}"
+            hx-get="{% url 'playlist-remove' request.user.id object.db_id video_obj.host_id %}"
+            hx-confirm='Delete {{video_obj.title}}?' hx-trigger='click'
+            hx-target='#playlist-video-{{video_obj.host_id}}' hx-swap='outerHTML'>
+            <button type='button'>Delete</button>
+        </a>
+        {{video_obj.host_id}}
+    </li>
+</div>

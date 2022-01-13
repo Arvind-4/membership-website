@@ -1,0 +1,13 @@
+<form method="POST" action="% url 'playlist-add' request.user.id object.db_id %}"
+  hx-post="{% url 'playlist-add' request.user.id object.db_id %}" hx-swap='afterend'>
+  {% csrf_token %}
+  {% for obj in object_list %}
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name='playlist_videos' value="{{obj.host_id}}" id="{{obj.host_id}}">
+    <label class="form-check-label" for="{{obj.host_id}}">
+      {{obj.title.capitalize}} - {{obj.db_id}}
+    </label>
+  </div>
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>

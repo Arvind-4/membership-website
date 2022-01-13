@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-12 col-md-3'>
+        {% include 'playlist/snippits/playlist-list-sidebar.html' %}
+    </div>
+    <div class='col-12 col-md-9'>
+        <h1>Playlists</h1>
+        <div class="list-group">
+            {% for object in object_list %}
+
+            {% include 'playlist/snippits/list-inline.html' %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
