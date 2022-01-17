@@ -18,9 +18,16 @@ from .forms import (
 
 def signup_view(request):
     form = SignUpForm(request.POST or None)
+    context = {
+        'form': form,
+    }
     if form.is_valid():
-        print('The Cleaned Dsta is ', form.cleaned_data)
-        form.save()
+        user = form.save(commit=False)
+        password = form.cleaned_data.get('password2')
+        email = form.cleaned_data.get('email')
+        user.email = email
+        user.set_password(password) 
+        user.save()
         return redirect('sign-in')
     context = {
         'form': form,
