@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ENV_FILE_PATH = BASE_DIR / '.env'
+
+load_dotenv(dotenv_path=ENV_FILE_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -47,8 +51,6 @@ INSTALLED_APPS = [
     'videos',
     'playlist',
     'pages',
-
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -88,16 +90,20 @@ ASGI_APPLICATION = 'backend.asgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': str(os.environ.get('POSTGRES_DB_NAME')),
+       'USER': str(os.environ.get('POSTGRES_USER')),
+       'PASSWORD': str(os.environ.get('POSTGRES_PASSWORD')),
+       'HOST': 'localhost',
+       'PORT': '5432',
+   },
     'videos': {
         'ENGINE': 'django_cassandra_engine',
-        'NAME': os.environ.get('ASTRA_DB_NAME'),
+        'NAME': str(os.environ.get('ASTRA_DB_NAME')),
         'TEST_NAME': 'db_name',
-        'USER': os.environ.get('ASTRA_DB_USER'),
-        'PASSWORD': os.environ.get('ASTRA_DB_PASSWORD'),
+        'USER': str(os.environ.get('ASTRA_DB_USER')),
+        'PASSWORD': str(os.environ.get('ASTRA_DB_PASSWORD')),
         'OPTIONS': {
             'connection': {
                 'cloud': {
@@ -155,7 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.Account'
 
-KEYSPACE = os.environ.get('ASTRA_DB_KEYSPACE')
+KEYSPACE = str(os.environ.get('ASTRA_DB_KEYSPACE'))
 
 LOGIN_URL = 'sign-in'
 
