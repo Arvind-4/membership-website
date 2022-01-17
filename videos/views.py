@@ -23,7 +23,10 @@ def video_create_view(request):
             user_id=request.user.id
         )
         if saved:
-            return redirect('video-list')
+            if request.htmx:
+                context['object'] = obj
+                return render(request, 'videos/snippits/list-inline.html', context)
+            # return redirect('video-list')
     return render(request, 'videos/create-view.html', context)
 
 @login_required
