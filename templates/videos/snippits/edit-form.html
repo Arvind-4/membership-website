@@ -2,8 +2,11 @@
 <form hx-post="{% url 'video-edit' object.host_id object.db_id %}" hx-target='#video-list-{{object.host_id}}'>
     {% csrf_token %}
     {{form|crispy}}
-    <button type="submit" class="btn btn-sm btn-primary">
+    <button type="submit" class="mx-3 my-3 btn btn-sm btn-primary float-end">
         Submit
+    </button>
+    <button type="error" class="my-3 btn btn-sm btn-secondary float-end">
+        Cancel
     </button>
     </div>
 </form>

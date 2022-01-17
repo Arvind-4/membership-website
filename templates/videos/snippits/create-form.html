@@ -1,13 +1,17 @@
 {% load crispy_forms_tags %}
-<form method="POST">
+<form method="POST" action="{% url 'video-create' %}" hx-post="{% url 'video-create' %}">
     {% csrf_token %}
-    {{form|crispy}}
+    <div class="col-8 mx-auto">
+        {{form|crispy}}
+    </div>
     <div class="col-md-12 pt-5">
         <button type="submit" class="btn btn-sm btn-primary float-end">
             Submit
         </button>
-        <button type='button' class='mx-3 btn btn-sm btn-outline-secondary float-end' onclick="history.back()">
-            Go Back
-        </button>
+        <a href='.'>
+            <button type='button' class='mx-3 btn btn-sm btn-outline-secondary float-end'>
+                Go Back
+            </button>
+        </a>
     </div>
 </form>

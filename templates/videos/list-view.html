@@ -2,31 +2,21 @@
 
 {% block content %}
 
-{% if message %}
-
-{% include 'videos/snippits/message.html' %}
-{% endif %}
-
-
 <div class='row'>
   <div class='col-md-3 col-lg-2 d-md-block collapse' id='navbarSupportedContent'>
     {% include 'videos/snippits/video-list-sidebar.html' %}
-
   </div>
   <div class='col-12 col-md-9 py-2'>
     <h1>Videos</h1>
+    <div id='video-create-form'></div>
     <div class='mt-3 mb-2'>
       {% for object in object_list %}
-
       {% include 'videos/snippits/list-inline.html' %}
-
       {% empty %}
       <h1>Empty</h1>
-
       {% endfor %}
     </div>
   </div>
 </div>
-
 
 {% endblock content %}
