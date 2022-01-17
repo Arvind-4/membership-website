@@ -15,17 +15,19 @@ from .models import Playlist
 @login_required
 def playlist_create_view(request, *args, **kwargs):
     form = PlayListCreateForm(request.POST or None)
+    context = {
+        'form': form
+    }
     if form.is_valid():
         title = form.cleaned_data.get('title')
         obj = Playlist.objects.create(
             user_id=request.user.id,
             title=title
         )
-        return redirect('playlist-list')
-
-    context = {
-        'form': form
-    }
+        if request.htmx:
+            context['object'] = obj
+            return render(request, 'playlist/snippits/list-inline.html', context)
+        # return redirect('playlist-list')
     return render(request, 'playlist/create-view.html', context=context)
 
 @login_required
@@ -65,7 +67,7 @@ def playlist_list_view(request, *args, **kwargs):
     }
     return render(request, 'playlist/list-view.html', context=context)
 
-
+@login_required
 def playlist_detail_view(request, user_id, db_id, *args, **kwargs):
     obj = Playlist.objects.filter(user_id=user_id, db_id=db_id)
     if not obj.exists():
