@@ -1,7 +1,6 @@
 <div id='playlist-video-inline-{{object.db_id}}'>
     <div class="list-group-item list-group-item-action">
         <a href="{% url 'playlist-detail' request.user.id object.db_id %}" style="text-decoration: none;">
-
             {{ object.title }}
         </a>
         <a hx-confirm='Delete {{object.title}}?' hx-trigger='click'

@@ -1,8 +1,21 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
 
-<form method="POST">
-  {% csrf_token %} {{form.as_p}}
-  <button type="submit">Submit</button>
+{% block content %}
+
+{% load crispy_forms_tags %}
+<form method="POST" action="{% url 'playlist-create' %}" hx-post="{% url 'playlist-create' %}">
+  {% csrf_token %}
+  <div class='col-8 mx-auto'>
+    {{form|crispy}}
+    <button type="submit" class="mx-3 my-3 btn btn-sm btn-primary float-end">
+      Submit
+    </button>
+    <a href=".">
+      <button type="button" class="my-3 btn btn-sm btn-secondary float-end">
+        Cancel
+      </button>
+    </a>
+  </div>
 </form>
 
 {% endblock content %}
